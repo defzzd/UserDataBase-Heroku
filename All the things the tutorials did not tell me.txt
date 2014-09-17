@@ -69,54 +69,95 @@ into settings.py
 
 
 
-SECOND add the stuff from < http://stackoverflow.com/questions/17718414/improperlyconfigured-settings-databases-is-improperly-configured-please-supply >
+SECOND add the stuff from < http://stackoverflow.com/questions/17718414/improperlyconfigured-settings-databases-
+
+is-improperly-configured-please-supply >
 
 -- this means putting an extra DATABASES = { 'default': .......
 
 into your settings.py file, WITH ALL THE HEROKU INFO DEFINED.
-Heroku will automagically create and maintain the database for you, but you need to go to the DATABASE'S SETTINGS PAGE associated with the heroku app (postgresql elephant icon on apps settings panel) and copypaste all the info there into the settings database dict.
+Heroku will automagically create and maintain the database for you, but you need to go to the DATABASE'S SETTINGS 
+
+PAGE associated with the heroku app (postgresql elephant icon on apps settings panel) and copypaste all the info 
+
+there into the settings database dict.
 
 
+After adding the settings.py code and pushing it all to heroku, you must enter:
 
-EXAMPLE
+heroku run python manage.py syncdb
+
+
+(( or maybe I only need to do that once before pushing to heroku? the CLI logs suggest it might be a database 
+
+thing, so the remotely hosted DB is what syncdb is affecting, and thus it doesn't matter if I make heroku do this 
+
+or not as long as it gets done from a current copy of the app somewhere -- I deduced this from the CLI output of 
+
+running it on my machine, seeing migration text, then doing it with heroku run and seeing "no new migrations" 
+
+stuff, then visiting the app page and seeing it worked))
+
+
+code for settings.py:
 
 __________________________________________
 
 
 ## ref: < https://devcenter.heroku.com/articles/getting-started-with-django >
 
-# Parse database configuration from $DATABASE_URL
+# Parse database configuration from 
+
+$DATABASE_URL
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
 
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+# Honor the 'X-Forwarded-Proto' 
+
+header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Allow all host headers
+# Allow all host 
+
+headers
 ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
 import os
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.abspath
+
+(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 
+
+'static'),
 )
 
 
-## IMPORTANT!! Extra past IN ADDITION TO ABOVE. ref: < http://stackoverflow.com/questions/17718414/improperlyconfigured-settings-databases-is-improperly-configured-please-supply >
+## IMPORTANT!! Extra past IN ADDITION TO ABOVE. ref: < 
+
+http://stackoverflow.com/questions/17718414/improperlyconfigured-settings-databases-is-improperly-configured-
+
+please-supply >
 
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2', 
-        'NAME': 'd7f3cd80p5eldm',
+        
+
+'NAME': 'd7f3cd80p5eldm',
         'HOST': 'ec2-54-204-43-138.compute-1.amazonaws.com',
-        'PORT': '5432',                    
+        'PORT': '5432',        
+
+            
         'USER': 'lmumltnrqukxyw',
-        'PASSWORD': 'Veofjxqu9hffKBVoDcjUVOh_GW',                             
+        'PASSWORD': 'Veofjxqu9hffKBVoDcjUVOh_GW',                      
+
+       
     }
 }
 
