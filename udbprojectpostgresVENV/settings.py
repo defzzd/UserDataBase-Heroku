@@ -108,6 +108,19 @@ STATICFILES_DIRS = (
 )
 
 
+## IMPORTANT!! Extra past IN ADDITION TO ABOVE. ref: < http://stackoverflow.com/questions/17718414/improperlyconfigured-settings-databases-is-improperly-configured-please-supply >
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'd7f3cd80p5eldm',
+        'HOST': 'ec2-54-204-43-138.compute-1.amazonaws.com',
+        'PORT': '5432',                    
+        'USER': 'lmumltnrqukxyw',
+        'PASSWORD': 'Veofjxqu9hffKBVoDcjUVOh_GW',                             
+    }
+}
 
 
 
