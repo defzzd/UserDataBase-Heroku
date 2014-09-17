@@ -1,0 +1,144 @@
+
+How to CREATE a new heroku app:
+
+
+rm -rf .git
+git init
+git add .
+git commit -am "Reinitialize"
+heroku create --stack cedar
+git push heroku master
+
+(( specifically, everything below the [r]e[m]ove command ))
+
+
+==========================================
+
+How to CHANGE a heroku app that already exists:
+
+
+
+cd << to the app directory root, that is the folder with manage.py in it >>
+git add .
+git commit -m "type the reason you're committing something here"
+git push heroku master
+
+
+
+heroku run python manage.py runserver --app appnamegoeshere
+
+
+
+==========================================
+
+How to ADD a heroku remote to git:
+
+git remote add heroku git@heroku.com:project.git
+
+
+
+==========================================
+
+For starting up the server:
+
+see https://devcenter.heroku.com/articles/getting-started-with-django
+
+((remember your Procfile, and remember it has no .txt extension))
+
+
+==========================================
+
+
+firing up the dyno:
+
+heroku ps:scale web=1 --app appnamegoeshere
+
+ps: this is actually how to change the number of active dynos, I think heroku defaults a dyno to on but not certain
+
+
+
+==========================================
+
+
+HOW TO SYNC DB
+
+
+First add the stuff from < https://devcenter.heroku.com/articles/getting-started-with-django >
+
+into settings.py
+
+
+
+SECOND add the stuff from < http://stackoverflow.com/questions/17718414/improperlyconfigured-settings-databases-is-improperly-configured-please-supply >
+
+-- this means putting an extra DATABASES = { 'default': .......
+
+into your settings.py file, WITH ALL THE HEROKU INFO DEFINED.
+Heroku will automagically create and maintain the database for you, but you need to go to the DATABASE'S SETTINGS PAGE associated with the heroku app (postgresql elephant icon on apps settings panel) and copypaste all the info there into the settings database dict.
+
+
+
+EXAMPLE
+
+__________________________________________
+
+
+## ref: < https://devcenter.heroku.com/articles/getting-started-with-django >
+
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+# Static asset configuration
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = 'staticfiles'
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+
+## IMPORTANT!! Extra past IN ADDITION TO ABOVE. ref: < http://stackoverflow.com/questions/17718414/improperlyconfigured-settings-databases-is-improperly-configured-please-supply >
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', 
+        'NAME': 'd7f3cd80p5eldm',
+        'HOST': 'ec2-54-204-43-138.compute-1.amazonaws.com',
+        'PORT': '5432',                    
+        'USER': 'lmumltnrqukxyw',
+        'PASSWORD': 'Veofjxqu9hffKBVoDcjUVOh_GW',                             
+    }
+}
+
+
+
+
+
+
+__________________________________________
+
+
+
+
+
+==========================================
+
+
+
+
+
+
+
+
+
+
