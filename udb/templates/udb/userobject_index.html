@@ -1,0 +1,49 @@
+
+
+
+<h1>User index</h1>
+
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+{% if userobject_list %}
+    
+
+    <ul>
+    {% for userobject in userobject_list %}
+        <li><a href="/udb/edit_userobject/{{ userobject.id }}/">{{ userobject.first_name }}</a></li>
+        
+
+    {% endfor %}
+    </ul>
+    
+
+{% else %}
+    
+
+    <p>No users found.</p>
+    
+
+{% endif %}
+
+
+
+<a href="/udb/create_userobject/">Click here to create a new user.</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

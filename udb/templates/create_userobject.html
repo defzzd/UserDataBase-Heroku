@@ -1,0 +1,19 @@
+<h1>Create new user</h1>
+<h3>Missing or invalid entries will helpfully reset the form.</h3><br>
+
+
+<p>{{ invalidation_string }}</p>
+<form action="/udb/create_userobject/" method="post">
+    {% csrf_token %}
+    <input id="first_name" type="text" name="first_name">
+    <label for="first_name">First name *</label>
+    <br>
+    <input id="last_name" type="text" name="last_name">
+    <label for="last_name">Last name</label>
+    <br>
+    <input id="email_address" type="text" name="email_address">
+    <label for="email_address">Email address *</label>
+	<p>* required</p>
+    <input type="submit" value="CreateUserObject">
+</form>
+<p><a href="/udb/" />Return to index</a></p>

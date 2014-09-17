@@ -1,0 +1,15 @@
+// This tells the browser to return the form data to the URL /your-name/, using the POST method.
+// If the template context contains a current_name variable, that will be used to pre-fill the your_name field.
+<form action="/udb/create_userobject/" method="post">
+    {% csrf_token %}
+    <input id="first_name" type="text" name="first_name">
+    <label for="first_name">First name</label>
+    <br>
+    <input id="last_name" type="text" name="last_name">
+    <label for="last_name">Last name</label>
+    <br>
+    <input id="email_address" type="text" name="email_address">
+    <label for="email_address">Email address</label>
+    <br><br>
+    <input type="submit" value="CreateUserObject">
+</form>

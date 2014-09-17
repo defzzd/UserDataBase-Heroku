@@ -6,5 +6,11 @@ urlpatterns = patterns('',
     # url(r'^$', 'udbprojectpostgresVENV.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
+    
+    url(r'^', include('udb.urls', namespace="udb")),
+        
+    
+    url(r'^udb/', include('udb.urls', namespace="udb")),
+        
     url(r'^admin/', include(admin.site.urls)),
 )

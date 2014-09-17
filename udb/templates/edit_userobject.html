@@ -1,0 +1,21 @@
+<h1>Edit user</h1>
+<h3>Invalid entries will helpfully reset the form. Missing entries will be ignored.</h3><br>
+
+<p>{{ invalidation_string }}</p>
+<form action="/udb/{{ userobject_id }}/" method="post">
+
+
+    {% csrf_token %}
+    <input id="first_name" type="text" name="first_name">
+    <label for="first_name">Change first name from "{{ supplied_first_name }}"</label>
+    <br>
+    <input id="last_name" type="text" name="last_name">
+    <label for="last_name">Change last name from "{{ supplied_last_name }}"</label>
+    <br>
+    <input id="email_address" type="text" name="email_address">
+    <label for="email_address">Change email address from "{{ supplied_email_address }}"</label>
+    <br><br>
+    <input type="submit" value="EditUserObject">
+</form>
+
+<p><a href="/udb/delete_userobject/{{ userobject_id }}/" />Delete this user</a> or <a href="/udb/" />Return to index</a></p>
